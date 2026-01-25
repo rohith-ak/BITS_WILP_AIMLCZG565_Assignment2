@@ -37,17 +37,17 @@ st.set_page_config(
 # Title and description
 # ------------------------------------------------------------------------------
 st.title("Adult Census Income Classification")
-st.markdown("---")
-st.write(
+with st.expander("Application Overview"):
+    st.write(
+        """
+    This application allows you to:
+    - Download sample test dataset  
+    - Upload your test CSV dataset  
+    - Select from 6 pre-trained ML models  
+    - Get predictions and comprehensive evaluation metrics  
+    - Visualize confusion matrix and classification report  
     """
-This application allows you to:
-- Download sample test dataset  
-- Upload your test CSV dataset  
-- Select from 6 pre-trained ML models  
-- Get predictions and comprehensive evaluation metrics  
-- Visualize confusion matrix and classification report  
-"""
-)
+    )
 
 # ------------------------------------------------------------------------------
 # Define saved models directory and model mapping
@@ -115,7 +115,7 @@ st.sidebar.header("Configuration")
 # ------------------------------------------------------------------------------
 # Download test dataset
 # ------------------------------------------------------------------------------
-st.sidebar.markdown("###Download Test Dataset")
+st.sidebar.markdown("### Download Test Dataset")
 test_data_path = project_root / "model" / "data" / "adult_test.csv"
 
 if test_data_path.exists():
@@ -130,13 +130,13 @@ if test_data_path.exists():
 else:
     st.sidebar.warning("Test dataset not found!")
 
-st.sidebar.markdown("---")
+# st.sidebar.markdown("---")
 
 # ------------------------------------------------------------------------------
 # File upload
 # ------------------------------------------------------------------------------
 uploaded_file = st.sidebar.file_uploader(
-    "📤 Upload Test CSV Dataset",
+    "Upload Test CSV Dataset",
     type=["csv"],
     help="Upload your test dataset in CSV format",
 )
@@ -175,20 +175,21 @@ if uploaded_file is not None:
         with st.expander("View Test Dataset Preview"):
             st.dataframe(df_preview.head(10))
 
-        col1, col2 = st.columns(2)
-        with col1:
-            st.write("**Dataset Info:**")
-            st.write(f"- Rows: {df_preview.shape[0]}")
-            st.write(f"- Columns: {df_preview.shape[1]}")
+        with st.expander("Dataset and column Info"):
+            col1, col2 = st.columns(2)
+            with col1:
+                st.write("**Dataset Info:**")
+                st.write(f"- Rows: {df_preview.shape[0]}")
+                st.write(f"- Columns: {df_preview.shape[1]}")
 
-        with col2:
-            st.write("**Column Names:**")
-            st.write(df_preview.columns.tolist())
+            with col2:
+                st.write("**Column Names:**")
+                st.write(df_preview.columns.tolist())
 
         # ----------------------------------------------------------------------
         # Predict button
         # ----------------------------------------------------------------------
-        st.sidebar.markdown("---")
+        # st.sidebar.markdown("---")
         if st.sidebar.button("Predict & Evaluate", type="primary"):
             if not model_path.exists():
                 st.error("❌ Model not found! Please train the model first.")
@@ -340,7 +341,7 @@ else:
         "Please download the test dataset or upload your own CSV file to get started"
     )
 
-    st.markdown("###Instructions:")
+    st.markdown("### Instructions:")
     st.markdown(
         """
 1. **Download Test Dataset**: Click the download link in the sidebar to get sample test data  
@@ -352,7 +353,7 @@ else:
 """
     )
 
-    st.markdown("###Available Pre-trained Models:")
+    st.markdown("### Available Pre-trained Models:")
     for i, model in enumerate(MODEL_FILES.keys(), 1):
         status = (
             "✅"
@@ -370,7 +371,7 @@ else:
             "To train models, run: `python train_and_save_models.py`"
         )
 
-    st.markdown("###Metrics Displayed:")
+    st.markdown("### Metrics Displayed:")
     st.markdown(
         """
 - **Accuracy**: Overall correctness of predictions  
@@ -382,7 +383,7 @@ else:
 """
     )
 
-    st.markdown("### ✨ Features:")
+    st.markdown("### Features:")
     st.markdown(
         """
 -  Pre-trained models with advanced feature engineering  
