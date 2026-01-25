@@ -349,3 +349,4 @@ st.markdown(
     "<div style='text-align: center'>Built with Streamlit | Adult Census Income Classification</div>",
     unsafe_allow_html=True
 )
+ 
