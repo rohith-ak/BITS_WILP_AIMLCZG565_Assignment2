@@ -19,13 +19,11 @@ from model.src.metrics_generation.metrics import calculate_metrics
 # Page configuration
 st.set_page_config(
     page_title="Adult Census Income Prediction",
-    page_icon="📊",
     layout="wide"
 )
 
 # Title and description
 st.title("Adult Census Income Classification")
-st.markdown("---")
 with st.expander("Application Information"):
     st.write("""
     This application allows you to:
@@ -109,7 +107,6 @@ if test_data_path.exists():
 else:
     st.sidebar.warning("Test dataset not found!")
 
-st.sidebar.markdown("---")
 
 uploaded_file = st.sidebar.file_uploader(
     "Upload Test CSV Dataset",
@@ -187,8 +184,7 @@ if st.session_state.engineered_data_ready:
     else:
         st.sidebar.error("Model not found! Please train models first.")
         st.sidebar.info("Run: python train_and_save_models.py")
-
-    st.sidebar.markdown("---")
+ 
     col1, col2 = st.sidebar.columns(2)
 
     with col1:
