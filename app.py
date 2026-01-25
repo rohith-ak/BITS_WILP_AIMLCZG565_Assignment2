@@ -170,7 +170,6 @@ if uploaded_file is not None:
         st.session_state.engineered_data_ready = False
 
 if st.session_state.engineered_data_ready:
-    st.sidebar.markdown("---")
     model_name = st.sidebar.selectbox(
         "Select Pre-trained Model",
         options=list(MODEL_FILES.keys()),
