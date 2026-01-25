@@ -11,8 +11,8 @@ from tabulate import tabulate
 
 # Add project root to path
 current_dir = Path(__file__).resolve().parent
-# project_root = current_dir.parent.parent  # Go up two levels to project root
-project_root = current_dir.parent
+project_root = current_dir.parent.parent  # Go up two levels to project root
+
 
 sys.path.insert(0, str(project_root))
 
