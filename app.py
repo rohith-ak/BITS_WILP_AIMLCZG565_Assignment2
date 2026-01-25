@@ -11,7 +11,7 @@ from pathlib import Path
 import sys
 import joblib
 import base64
-
+ 
 # ------------------------------------------------------------------------------
 # Add project root to path
 # ------------------------------------------------------------------------------
@@ -406,4 +406,4 @@ st.markdown(
     "Built with Streamlit | Adult Census Income Classification"
     "</div>",
     unsafe_allow_html=True,
-)
+) 
