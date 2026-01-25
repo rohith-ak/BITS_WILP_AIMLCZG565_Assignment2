@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Model Comparison - Adult Census Income Classification</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background-color: #f5f5f5;
+}
+h1 {
+    color: #333;
+    text-align: center;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+tr:hover {
+    background-color: #f5f5f5;
+}
+.best {
+    background-color: #d4edda;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+<h1>Adult Census Income Classification - Model Comparison</h1>
+<table class="dataframe table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>ML Model Name</th>
+      <th>Accuracy</th>
+      <th>AUC</th>
+      <th>Precision</th>
+      <th>Recall</th>
+      <th>F1</th>
+      <th>MCC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Logistic Regression</td>
+      <td>0.7831</td>
+      <td>0.8438</td>
+      <td>0.5362</td>
+      <td>0.6938</td>
+      <td>0.6049</td>
+      <td>0.4660</td>
+    </tr>
+    <tr>
+      <td>Decision Tree</td>
+      <td>0.8153</td>
+      <td>0.7455</td>
+      <td>0.6148</td>
+      <td>0.6116</td>
+      <td>0.6132</td>
+      <td>0.4919</td>
+    </tr>
+    <tr>
+      <td>kNN</td>
+      <td>0.7912</td>
+      <td>0.7548</td>
+      <td>0.5958</td>
+      <td>0.3965</td>
+      <td>0.4761</td>
+      <td>0.3636</td>
+    </tr>
+    <tr>
+      <td>Naive Bayes</td>
+      <td>0.7925</td>
+      <td>0.8249</td>
+      <td>0.6356</td>
+      <td>0.3118</td>
+      <td>0.4184</td>
+      <td>0.3387</td>
+    </tr>
+    <tr>
+      <td>Random Forest (Ensemble)</td>
+      <td>0.8688</td>
+      <td>0.9183</td>
+      <td>0.7901</td>
+      <td>0.6151</td>
+      <td>0.6917</td>
+      <td>0.6177</td>
+    </tr>
+    <tr>
+      <td>XGBoost (Ensemble)</td>
+      <td>0.8770</td>
+      <td>0.9293</td>
+      <td>0.7974</td>
+      <td>0.6514</td>
+      <td>0.7170</td>
+      <td>0.6448</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
