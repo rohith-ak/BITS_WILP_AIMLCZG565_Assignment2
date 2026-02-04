@@ -1,46 +1,23 @@
-# Adult Census Income Classification
+## a. Problem Statement
+
+This project focuses on building a **binary classification model** that predicts whether a person earns more than $50,000 per year using census data.
+
+The aim is to study demographic and work-related characteristics and use them to group individuals into two income levels:
+
+* **≤ $50K** – People earning $50,000 or less annually
+* **> $50K** – People earning more than $50,000 annually
+
+Such a prediction system is useful in several real-world scenarios, including:
+
+* Supporting economic studies and government policy decisions
+* Enabling targeted marketing and better customer segmentation
+* Gaining insights into the social and economic factors that influence income
+
+To achieve this, the project trains and evaluates **six different machine learning models** and compares their performance to determine which approach works best for predicting income levels.
 
 ---
 
-## Table of Contents
-
-* [Problem Statement](#problem-statement)
-* [Dataset Description](#dataset-description)
-* [Models Used](#models-used)
-* [Model Performance Observations](#model-performance-observations)
-* [Installation & Setup](#installation--setup)
-* [Usage](#usage)
-* [Project Structure](#project-structure)
-* [Deployment](#deployment)
-* [Requirements](#requirements)
-* [Features](#features)
-* [License](#license)
-* [Author](#author)
-* [Acknowledgments](#acknowledgments)
-* [Assignment Submission Checklist](#assignment-submission-checklist)
-
----
-
-## Problem Statement
-
-This project implements a **binary classification system** to predict whether an individual's annual income exceeds **$50,000** based on census data.
-
-The goal is to analyze demographic and employment-related features to classify individuals into two income categories:
-
-* **<=50K**: Annual income of $50,000 or less
-* **>50K**: Annual income exceeding $50,000
-
-This classification task is valuable for:
-
-* Economic research and policy-making
-* Targeted marketing and customer segmentation
-* Understanding socioeconomic factors affecting income levels
-
-The project implements and compares **6 different machine learning algorithms** to identify the most effective approach for income prediction.
-
----
-
-## Dataset Description
+## b. Dataset Description
 
 **Dataset Name**: Adult Census Income Dataset (UCI Machine Learning Repository)
 
@@ -70,7 +47,7 @@ The project implements and compares **6 different machine learning algorithms** 
 
 ---
 
-## Features (Original Dataset)
+### Features (Original Dataset)
 
 | Feature         | Type        | Description               |
 | --------------- | ----------- | ------------------------- |
@@ -88,10 +65,10 @@ The project implements and compares **6 different machine learning algorithms** 
 | capital-loss    | Continuous  | Capital losses            |
 | hours-per-week  | Continuous  | Working hours per week    |
 | native-country  | Categorical | Country of origin         |
-
+   
 ---
 
-## Feature Engineering Applied
+### Feature Engineering Applied    
 
 * Dropped redundant features: `education` (kept `educational-num`), `fnlwgt`
 * Handled missing values: replaced `?` with `"Unknown"`
@@ -107,7 +84,7 @@ The project implements and compares **6 different machine learning algorithms** 
 
 ---
 
-## Models Used
+## c. Models Used
 
 * Logistic Regression
 * Decision Tree
@@ -118,314 +95,40 @@ The project implements and compares **6 different machine learning algorithms** 
 
 ---
 
-## Comparison Table with Evaluation Metrics
+### Comparison Table with Evaluation Metrics
 
 | ML Model                 | Accuracy | AUC    | Precision | Recall | F1     | MCC    |
 | ------------------------ | -------- | ------ | --------- | ------ | ------ | ------ |
-| Logistic Regression      | 0.7763   | 0.8377 | 0.5248    | 0.6916 | 0.5968 | 0.4542 |
-| Decision Tree            | 0.8185   | 0.7479 | 0.6229    | 0.6125 | 0.6176 | 0.4987 |
-| kNN                      | 0.7912   | 0.7548 | 0.5958    | 0.3965 | 0.4761 | 0.3636 |
-| Naive Bayes              | 0.7925   | 0.8249 | 0.6356    | 0.3118 | 0.4184 | 0.3387 |
-| Random Forest (Ensemble) | 0.8689   | 0.9188 | 0.7905    | 0.6151 | 0.6918 | 0.6180 |
-| XGBoost (Ensemble)       | 0.8768   | 0.9299 | 0.7962    | 0.6518 | 0.7168 | 0.6443 |
+| Logistic Regression      | 0.7824   | 0.8497 | 0.5341    | 0.7100 | 0.6096 | 0.4719 |
+| Decision Tree            | 0.8119   | 0.7400 | 0.6079    | 0.6022 | 0.6051 | 0.4816 |
+| kNN                      | 0.7982   | 0.7705 | 0.6206    | 0.4029 | 0.4886 | 0.3833 |
+| Naive Bayes              | 0.7932   | 0.8307 | 0.6427    | 0.3062 | 0.4148 | 0.3392 |
+| Random Forest (Ensemble) | 0.8637   | 0.9197 | 0.7928    | 0.5825 | 0.6716 | 0.5992 |
+| XGBoost (Ensemble)       | 0.8680   | 0.9273 | 0.7781    | 0.6270 | 0.6945 | 0.6173 |
 
 ---
 
-## Best Models by Metric
+### Best Models by Metric
 
-* **Accuracy**: XGBoost (87.68%)
-* **AUC**: XGBoost (92.99%)
-* **Precision**: XGBoost (79.62%)
-* **Recall**: Logistic Regression (69.16%)
-* **F1 Score**: XGBoost (71.68%)
-* **MCC**: XGBoost (64.43%)
+* **Accuracy**: XGBoost (86.80%)
+* **AUC**: XGBoost (92.73%)
+* **Precision**: Random Forest (79.28%)
+* **Recall**: Logistic Regression (71.00%)
+* **F1 Score**: XGBoost (69.45%)
+* **MCC**: XGBoost (61.73%)
 
----
-
-## Model Performance Observations
-
-* Logistic Regression achieved moderate accuracy with strong recall.
-* Decision Tree improved accuracy but showed weaker probability calibration.
-* kNN suffered from poor recall and sensitivity to feature scaling.
-* Naive Bayes underperformed due to independence assumptions.
-* Random Forest delivered strong balanced performance.
-* XGBoost emerged as the **best overall model**, excelling across most metrics.
 
 ---
 
-## Installation & Setup
+### Model Performance Observations
 
-### Prerequisites
-
-* Python 3.8 or higher
-* pip package manager
-* Virtual environment (recommended)
-
-### Step 1: Clone the Repository
-
-```bash
-git clone https://github.com/your-username/adult-census-ml-classification.git
-cd adult-census-ml-classification/project-folder
-```
-
-### Step 2: Create Virtual Environment
-
-**Windows**
-
-```bash
-python -m venv venv
-venv\Scripts\activate
-```
-
-**Linux**
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### Step 3: Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### Step 4: Train All Models
-
-```bash
-cd model/src
-python train.py
-```
-
-**Expected Output (excerpt)**:
-
-```
-TRAINING AND SAVING ALL MODELS
-Loading training data...
-Features shape: (41515, 51)
-Target shape: (41515,)
-Training: Logistic Regression
-Training completed!
-ALL MODELS TRAINED AND SAVED SUCCESSFULLY!
-```
-
-### Step 5: Generate Comparison Table (Optional)
-
-```bash
-python generate_comparison_table.py
-```
-
-Results saved to:
-
-```
-model/results/model_comparison.csv
-```
+| ML Model Name            | Observation about model performance |
+| ------------------------ | ----------------------------------- |
+| Logistic Regression      | Achieves good recall (0.7100) but lower precision (0.5341), indicating it captures most positive cases but with more false positives. Best for scenarios prioritizing sensitivity. |
+| Decision Tree            | Shows balanced precision (0.6079) and recall (0.6022) with moderate accuracy (0.8119). However, lower AUC (0.7400) suggests potential overfitting to training data. |
+| kNN                      | Struggles with low recall (0.4029) despite decent precision (0.6206), missing many positive cases. Poor F1 score (0.4886) indicates suboptimal performance for imbalanced data. |
+| Naive Bayes              | Exhibits highest precision (0.6427) among single models but severely limited recall (0.3062). Makes conservative predictions, missing majority of positive income cases. |
+| Random Forest (Ensemble) | Strong overall performer with excellent AUC (0.9197) and balanced metrics. High precision (0.7928) makes it reliable for positive predictions with good generalization capability. |
+| XGBoost (Ensemble)       | Top performer across all metrics with highest accuracy (0.8680) and AUC (0.9273). Best balance of precision-recall trade-off, making it the most robust model. |
 
 ---
-
-## Usage
-
-### Running the Streamlit App Locally
-
-```bash
-streamlit run app.py
-```
-
-App opens at:
-
-```
-http://localhost:8501
-```
-
----
-
-## Using the Application
-
-1. Download test dataset (7,327 rows, 15 columns)
-2. Upload CSV (same features as training data)
-3. Select model:
-
-   * Logistic Regression
-   * Decision Tree
-   * kNN
-   * Naive Bayes
-   * Random Forest
-   * XGBoost
-4. View model status
-5. Predict & evaluate
-6. View results:
-
-   * Accuracy, Precision, Recall, F1, MCC, AUC
-   * Confusion matrix (Plotly)
-   * Classification report
-7. Download predictions with probabilities
-
----
-
-## Project Structure
-
-```
-project-folder/
-│
-├── app.py
-├── requirements.txt
-├── README.md
-│
-├── model/
-│   ├── data/
-│   │   ├── adult.csv
-│   │   ├── adult_train.csv
-│   │   └── adult_test.csv
-│   │
-│   ├── saved_models/
-│   │   ├── logistic_regression.joblib
-│   │   ├── decision_tree.joblib
-│   │   ├── knn.joblib
-│   │   ├── naive_bayes.joblib
-│   │   ├── random_forest.joblib
-│   │   └── xgboost.joblib
-│   │
-│   ├── results/
-│   │   ├── model_comparison.csv
-│   │   ├── model_comparison.txt
-│   │   ├── model_comparison.html
-│   │   └── model_comparison_latex.txt
-│   │
-│   └── src/
-│       ├── model_code/
-│       ├── feature_engineering/
-│       ├── metrics_generation/
-│       ├── visualization.py
-│       ├── train.py
-│       └── generate_comparison_table.py
-```
-
----
-
-## Deployment
-
-### Deploy on Streamlit Community Cloud
-
-1. Push to GitHub
-
-```bash
-git init
-git add .
-git commit -m "Initial commit - Adult Census ML Classification"
-git branch -M main
-git remote add origin https://github.com/your-username/adult-census-ml-classification.git
-git push -u origin main
-```
-
-2. Deploy App
-
-* Go to [https://streamlit.io/cloud](https://streamlit.io/cloud)
-* Sign in with GitHub
-* Click **New App**
-* Select repository
-* Branch: `main`
-* Main file: `project-folder/app.py`
-* Click **Deploy**
-
-3. App URL
-
-```
-https://your-username-adult-census-ml.streamlit.app
-```
-
----
-
-## Requirements
-
-### Python Packages
-
-```
-streamlit==1.41.1
-scikit-learn==1.5.2
-xgboost==2.1.3
-pandas==2.2.3
-numpy==1.26.4
-plotly==5.24.1
-matplotlib==3.9.3
-seaborn==0.13.2
-joblib==1.4.2
-tabulate==0.9.0
-scipy==1.11.4
-```
-
-### System Requirements
-
-* RAM: 4GB minimum (8GB recommended)
-* Storage: ~500MB
-* Python: 3.8+ (tested on 3.11)
-
----
-
-## Features
-
-### Advanced Feature Engineering
-
-* 51 engineered features from 14 original features
-* Binary flags for capital gain/loss
-* Log transformations for skewed distributions
-* Age and hours-per-week binning
-* Interaction and ratio features
-
-### Model Training Features
-
-* Class imbalance handling
-* Hyperparameter tuning (GridSearchCV, RandomizedSearchCV)
-* Stratified train-test split
-* Cross-validation (3–5 folds)
-
-### Streamlit App Features
-
-* Interactive UI
-* Real-time predictions
-* Interactive Plotly visualizations
-* Downloadable prediction results
-
----
-
-## License
-
-This project is for educational purposes as part of **BITS Pilani – ML Assignment 2**.
-
----
-
-## Author
-
-**ROHITH KRISHNAMURTHY**
-BITS Pilani – M.Tech (AIML)
-Assignment 2: Machine Learning (AIMLCZG565)
-
----
-
-## Acknowledgments
-
-* Dataset: UCI Machine Learning Repository
-* Extracted by Barry Becker from the 1994 Census database
-* Donors: Ronny Kohavi and Barry Becker
-
----
-
-## Assignment Submission Checklist
-
-* [x] GitHub repository with complete source code
-* [x] `requirements.txt` with dependencies
-* [x] README with all required sections
-* [x] Dataset description (1 mark)
-* [x] Comparison table with 6 models (6 marks)
-* [x] Model performance observations (3 marks)
-* [x] Streamlit app with:
-
-  * Dataset upload
-  * Model selection
-  * Evaluation metrics
-  * Confusion matrix / classification report
-* [ ] Screenshot from BITS Virtual Lab (**PENDING**)
-* [ ] Deployed Streamlit app link
-* [ ] PDF submission with README + screenshot
-
-**Total**: 15 marks (10 + 4 + 1)
-**Last Updated**: January 22, 2026

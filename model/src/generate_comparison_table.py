@@ -25,14 +25,14 @@ from model.src.model_code.random_forest import RandomForestModel
 from model.src.model_code.xgboost_model import XGBoostModel
 
 
-def generate_comparison_table(data_path, use_feature_engineering=True, test_size=0.2, random_state=42):
+def generate_comparison_table(train_data_path, test_data_path, use_feature_engineering=True, random_state=42):
     """
-    Generate comparison table for all models.
+    Generate comparison table for all models using separate train and test files.
 
     Args:
-        data_path: Path to the dataset csv file
+        train_data_path: Path to the training dataset csv file
+        test_data_path: Path to the testing dataset csv file
         use_feature_engineering: Whether to use advanced feature engineering
-        test_size: Proportion of test set
         random_state: Random seed for reproducibility
 
     Returns:
@@ -41,32 +41,34 @@ def generate_comparison_table(data_path, use_feature_engineering=True, test_size
     print("=" * 80)
     print("ADULT CENSUS INCOME CLASSIFICATION - MODEL COMPARISON")
     print("=" * 80)
-    print(f"Dataset: {data_path}")
+    print(f"Training Dataset: {train_data_path}")
+    print(f"Testing Dataset: {test_data_path}")
     print(f"Feature Engineering: {'Enabled' if use_feature_engineering else 'Disabled'}")
-    print(f"Test size: {test_size * 100}%")
     print(f"Random State: {random_state}")
     print("\n" + "=" * 80)
 
-    # Load and preprocess data
-    print("\n📊 Loading and preprocessing data...")
-    X, y = load_dataset(data_path, use_feature_engineering=use_feature_engineering)
+    # Load and preprocess training data
+    print("\n📊 Loading and preprocessing training data...")
+    X_train, y_train = load_dataset(train_data_path, use_feature_engineering=use_feature_engineering)
 
-    print(f"✅ Data loaded successfully")
-    print(f" - Features shape: {X.shape}")
-    print(f" - Target shape: {y.shape}")
-    print(f" - Class distribution: {pd.Series(y).value_counts().to_dict()}")
+    print(f"✅ Training data loaded successfully")
+    print(f" - Training features shape: {X_train.shape}")
+    print(f" - Training target shape: {y_train.shape}")
+    print(f" - Training class distribution: {pd.Series(y_train).value_counts().to_dict()}")
 
-    # Split data
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y,
-        test_size=test_size,
-        random_state=random_state,
-        stratify=y
-    )
+    # Load and preprocess testing data
+    print("\n📊 Loading and preprocessing testing data...")
+    X_test, y_test = load_dataset(test_data_path, use_feature_engineering=use_feature_engineering)
 
-    print(f"\n📊 Data split:")
+    print(f"✅ Testing data loaded successfully")
+    print(f" - Testing features shape: {X_test.shape}")
+    print(f" - Testing target shape: {y_test.shape}")
+    print(f" - Testing class distribution: {pd.Series(y_test).value_counts().to_dict()}")
+
+    print(f"\n📊 Data summary:")
     print(f" - Training samples: {X_train.shape[0]}")
     print(f" - Testing samples: {X_test.shape[0]}")
+    print(f" - Total features: {X_train.shape[1]}")
 
     # Define models
     models = {
@@ -93,8 +95,8 @@ def generate_comparison_table(data_path, use_feature_engineering=True, test_size
             model.train(X_train, y_train)
             print("✅ Training completed!")
 
-            # Evaluate model
-            print("📈 Evaluating model...")
+            # Evaluate model on TEST data
+            print("📈 Evaluating model on test data...")
             metrics = model.evaluate(X_test, y_test)
             print("✅ Evaluation completed!")
 
@@ -272,24 +274,40 @@ tr:hover {{
 
 def main():
     """Main function to run the comparison."""
-    data_path = project_root / "model" / "data" / "adult.csv"
+    train_data_path = project_root / "model" / "data" / "adult_train.csv"
+    test_data_path = project_root / "model" / "data" / "adult_test.csv"
 
-    if not data_path.exists():
-        print(f"❌ Error: Data file not found at {data_path}")
-        print(f"   Looking at: {data_path.absolute()}")
+    # Check if both files exist
+    if not train_data_path.exists():
+        print(f"❌ Error: Training data file not found at {train_data_path}")
+        print(f"   Looking at: {train_data_path.absolute()}")
         print("\nExpected directory structure:")
         print(" project-folder/")
         print(" ├── model/")
         print(" │   ├── data/")
-        print(" │   │   └── adult.csv  <- Should be here")
+        print(" │   │   ├── adult_train.csv  <- Should be here")
+        print(" │   │   └── adult_test.csv   <- Should be here")
+        print(" │   └── src/")
+        print(" │       └── generate_comparison_table.py  <- You are here")
+        return
+
+    if not test_data_path.exists():
+        print(f"❌ Error: Testing data file not found at {test_data_path}")
+        print(f"   Looking at: {test_data_path.absolute()}")
+        print("\nExpected directory structure:")
+        print(" project-folder/")
+        print(" ├── model/")
+        print(" │   ├── data/")
+        print(" │   │   ├── adult_train.csv  <- Should be here")
+        print(" │   │   └── adult_test.csv   <- Should be here")
         print(" │   └── src/")
         print(" │       └── generate_comparison_table.py  <- You are here")
         return
 
     comparison_df = generate_comparison_table(
-        data_path=data_path,
+        train_data_path=train_data_path,
+        test_data_path=test_data_path,
         use_feature_engineering=True,
-        test_size=0.2,
         random_state=42
     )
 
@@ -301,3 +319,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+

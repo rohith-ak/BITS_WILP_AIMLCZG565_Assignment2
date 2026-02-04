@@ -1,3 +1,15 @@
+"""
+This Streamlit application provides an interactive web interface for predicting income levels (<=50K or >50K) 
+from the Adult Census dataset using six pre-trained machine learning models 
+including Logistic Regression, Decision Tree, KNN, Naive Bayes, Random Forest, and XGBoost. 
+The app allows users to download a sample test dataset or upload their own CSV file, automatically performs feature engineering 
+on the uploaded data, and generates comprehensive evaluation metrics 
+including accuracy, precision, recall, F1 score, MCC, and AUC along with visual representations like confusion matrices and feature importance plots. 
+Users can view predictions, download results with actual vs predicted values, and compare performance across different models through an 
+intuitive sidebar-based navigation system.
+"""
+
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -36,7 +48,7 @@ with st.expander("Application Information"):
 
 # Define saved_models directory at project root
 SAVED_MODELS_DIR = project_root / "model/saved_models"
-TEMP_ENGINEERED_DATA_PATH = project_root / "temp_engineered_data.csv"
+TEMP_ENGINEERED_DATA_PATH = project_root / "model/temp_engineered_data.csv"
 
 # Model files mapping
 MODEL_FILES = {
@@ -190,6 +202,8 @@ if st.session_state.engineered_data_ready:
         predict_button = st.button("Predict & Evaluate", type="primary", use_container_width=True)
     with col2:
         clear_button = st.button("Clear Output", use_container_width=True)
+    
+    st.sidebar.info("Model loading and prediction may take a few moments. Please be patient.")
 
     if clear_button:
         st.session_state.show_results = False
